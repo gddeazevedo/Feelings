@@ -1,0 +1,17 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}
+    Create an article
+{% endblock title %}
+
+{% block content %}
+    <h1>Delete article</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>Are you sure  you want to delete the post "{{ article.title }}"</h2>
+        <div>
+            <input type="submit" value="Yes, Delete">
+            <a href="{% url 'blog:article_path' article.pk %}">Cancel</a>
+        </div>
+    </form>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}
+    Articles
+{% endblock title %}
+
+{% block content %}
+    <h1>Articles</h1>
+
+    <a href="{% url 'blog:new_article_path' %}">Create an article</a>
+
+    {% if articles|length > 0 %}
+        {% for article in articles %}
+            <li>
+                <a href="{% url 'blog:article_path' article.pk %}">
+                    {{ article.title }}, by: {{ article.author.username }}
+                </a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <h1>No articles</h1>
+    {% endif %}
+{% endblock content %}

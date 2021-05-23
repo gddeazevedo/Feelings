@@ -1,0 +1,15 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}
+    Create an article
+{% endblock title %}
+
+{% block content %}
+    <h1>Create an article</h1>
+    <form action="{% url 'blog:new_article_path' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+        <button type="button"><a href="{% url 'blog:root_path' %}">Cancel</a></button>
+    </form>
+{% endblock content %}

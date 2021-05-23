@@ -1,0 +1,21 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}
+    Article - {{ article.title }}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    <h2>{{ article.body }}</h2>
+    <a href="{% url 'blog:root_path' %}">Back</a>
+    <a href="{% url 'blog:edit_article_path' article.pk %}">Edit</a>
+    <a href="{% url 'blog:delete_article_path' article.pk %}">Delete</a>
+    {% if article.comment_set.all|length > 0 %}
+        <h3>Comments</h3>
+        {% for comment in article.comment_set.all %}
+            <p>{{ comment.commenter.username }}: {{ comment.body }}</p>
+        {% endfor %}
+    {% else %}
+        <h1>No comments</h1>
+    {% endif %}
+{% endblock content %}
