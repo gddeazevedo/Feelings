@@ -20,10 +20,6 @@ class ArticleCreateView(CreateView):
     fields = ['title', 'body']
     template_name = 'blog/article_form_create.html'
 
-    # def form_valid(self, form):
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
-
     def get_success_url(self) -> str:
         return reverse('blog:article_path', kwargs={'pk': self.object.pk})
 
@@ -33,10 +29,6 @@ class ArticleUpdateView(UpdateView):
     fields = ['title', 'body']
     template_name = 'blog/article_form_edit.html'
 
-    # def form_valid(self, form):
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
-
     def get_success_url(self) -> str:
         return reverse('blog:article_path', kwargs={'pk': self.object.pk})
 
@@ -44,4 +36,4 @@ class ArticleUpdateView(UpdateView):
 class ArticleDeleteView(DeleteView):
     model = Article
     context_object_name = 'article'
-    success_url = 'blog:root_path'
+    success_url = '/'
