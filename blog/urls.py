@@ -1,31 +1,25 @@
 from django.urls import path
-from .views import (
-    ArticleListView,
-    ArticleDetailView,
-    ArticleCreateView,
-    ArticleUpdateView,
-    ArticleDeleteView
-)
+from . import views
 
 
 app_name = 'blog'
 
 urlpatterns = [
     # /
-    path('', ArticleListView.as_view(), name='root_path'),
+    path('', views.ArticleListView.as_view(), name='root_path'),
 
     # /articles
-    path('articles/', ArticleListView.as_view(), name='articles_path'),
+    path('articles/', views.ArticleListView.as_view(), name='articles_path'),
 
     # /articles/:id
-    path('articles/<int:pk>/', ArticleDetailView.as_view(), name='article_path'),
+    path('articles/<int:pk>/', views.article_detail, name='article_path'),
 
     # /articles/new
-    path('articles/new/', ArticleCreateView.as_view(), name='new_article_path'),
+    path('articles/new/', views.ArticleCreateView.as_view(), name='new_article_path'),
 
     # /articles/:id/edit
-    path('articles/<int:pk>/edit/', ArticleUpdateView.as_view(), name='edit_article_path'),
+    path('articles/<int:pk>/edit/', views.ArticleUpdateView.as_view(), name='edit_article_path'),
 
     # /articles/:id/delete
-    path('articles/<int:pk>/delete/', ArticleDeleteView.as_view(), name='delete_article_path'),
+    path('articles/<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='delete_article_path'),
 ]

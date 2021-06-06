@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1>Create an article</h1>
-    <form action="{% url 'blog:new_article_path' %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Create</button>
