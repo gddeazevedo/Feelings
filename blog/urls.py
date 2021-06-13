@@ -22,4 +22,7 @@ urlpatterns = [
 
     # /articles/:id/delete
     path('articles/<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='delete_article_path'),
+
+    # /comments/:id/delete
+    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete_comment_path'),
 ]
