@@ -15,7 +15,7 @@
         {% for comment in article.comment_set.all %}
             <div style="border: solid #4f4f4f 3px;">
                 <p>{{ comment.commenter.username }}: {{ comment.body }}</p>
-                <a href="#">Delete</a>
+                <a href="{% url 'blog:delete_comment_path' comment.pk %}">Delete</a>
             </div>
             <br/>
         {% endfor %}

@@ -2,8 +2,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpRequest
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Article
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from .models import Article, Comment
 from .forms import CommentForm
 
 
@@ -61,3 +61,11 @@ class ArticleDeleteView(DeleteView):
     model = Article
     context_object_name = 'article'
     success_url = '/'
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    context_object_name = 'comment'
+
+    def get_success_url(self) -> str:
+        return reverse('blog:article_path', kwargs={'pk': self.object.article.pk})
