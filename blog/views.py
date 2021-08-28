@@ -1,16 +1,19 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Article, Comment
 from .forms import CommentForm
 
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
     context_object_name = 'articles'
     ordering = ['-created_at']
+
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        return super().get(request, *args, **kwargs)
 
 
 def article_detail(request: HttpRequest, pk: int):
