@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpRequest, HttpResponseRedirect
@@ -27,4 +27,5 @@ def sign_up(request: HttpRequest):
 
 
 def logout(request: HttpRequest):
-    pass
+    auth_logout(request)
+    return HttpResponseRedirect(reverse('blog:root_path'))
