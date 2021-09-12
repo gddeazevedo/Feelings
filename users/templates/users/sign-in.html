@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign In
+{% endblock title %}
+
+{% block links %}
+    <a href="{% url 'users:user_signup_path' %}">Sign Up</a>
+{% endblock links %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="{% url 'users:user_login_path' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Sign In">
+        <input type="hidden" name="next" value="{% url 'blog:root_path' %}">
+    </form>
+{% endblock content %}

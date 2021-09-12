@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 super_admin_info.txt
+.vscode
+secret.py
