@@ -12,6 +12,7 @@
     <div>
         {% if user.is_authenticated %}
             <p>Hello, {{ user.username }}</p>
+            <p><img src="{{ user.profile.image.url }}" alt=""></p>
             <a href="{% url 'users:user_logout_path' %}">Logout</a>
         {% else %}
             {% block links %}

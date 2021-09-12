@@ -1,5 +1,3 @@
-<h1>Sign In page</h1>
-
 {% extends 'base.html' %}
 
 {% block title %}
@@ -11,7 +9,7 @@
 {% endblock links %}
 
 {% block content %}
-    <h1>Sign Up</h1>
+    <h1>Sign In</h1>
     <form action="{% url 'users:user_login_path' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
