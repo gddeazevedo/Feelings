@@ -35,7 +35,7 @@ def article_detail(request: HttpRequest, pk: int):
     return render(request, 'blog/article_detail.html', context)
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     fields = ['title', 'body']
     template_name = 'blog/article_form_create.html'
@@ -51,24 +51,40 @@ class ArticleCreateView(CreateView):
         return reverse('blog:article_path', kwargs={'pk': self.object.pk})
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
     fields = ['title', 'body']
     template_name = 'blog/article_form_edit.html'
+
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        article = self.get_object()
+        return self.request.user == article.author
 
     def get_success_url(self) -> str:
         return reverse('blog:article_path', kwargs={'pk': self.object.pk})
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
     context_object_name = 'article'
     success_url = '/'
 
+    def test_func(self):
+        article = self.get_object()
+        return self.request.user == article.author
 
-class CommentDeleteView(DeleteView):
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     context_object_name = 'comment'
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.author
 
     def get_success_url(self) -> str:
         return reverse('blog:article_path', kwargs={'pk': self.object.article.pk})
