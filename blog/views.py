@@ -12,8 +12,8 @@ class ArticleListView(LoginRequiredMixin, ListView):
     context_object_name = 'articles'
     ordering = ['-created_at']
 
-    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        return super().get(request, *args, **kwargs)
+    # def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    #     return super().get(request, *args, **kwargs)
 
 
 def article_detail(request: HttpRequest, pk: int):
@@ -84,7 +84,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         comment = self.get_object()
-        return self.request.user == comment.author
+        return self.request.user == comment.commenter
 
     def get_success_url(self) -> str:
         return reverse('blog:article_path', kwargs={'pk': self.object.article.pk})
