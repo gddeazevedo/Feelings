@@ -10,7 +10,7 @@
 
 {% block content %}
     <h1>Sign In</h1>
-    <form action="{% url 'users:user_login_path' %}" method="POST">
+    <form action="{% url 'users:sign_in' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Sign In">

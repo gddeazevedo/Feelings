@@ -59,7 +59,9 @@ ROOT_URLCONF = 'feelings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,5 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # where the profile pictures will be saved
 MEDIA_URL = '/media/' # the url path to the media
 
-LOGIN_URL = 'users:user_login_path' # where the user will be sent after accessing a private route
-LOGIN_REDIRECT_URL = 'blog:root_path' # where the user will be sent after login
+LOGIN_URL = 'users:sign_in' # where the user will be sent after accessing a private route
+LOGIN_REDIRECT_URL = 'blog:root' # where the user will be sent after login
