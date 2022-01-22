@@ -5,3 +5,7 @@ label, input {
 span.helptext {
     display: none;
 }
+
+body {
+    background-color: aqua;
+}
