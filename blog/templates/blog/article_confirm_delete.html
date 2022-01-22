@@ -11,7 +11,7 @@
         <h2>Are you sure  you want to delete the post "{{ article.title }}"</h2>
         <div>
             <input type="submit" value="Yes, Delete">
-            <a href="{% url 'blog:article_path' article.pk %}">Cancel</a>
+            <a href="{% url 'blog:article_detail' article.pk %}">Cancel</a>
         </div>
     </form>
 {% endblock content %}

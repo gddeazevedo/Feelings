@@ -6,10 +6,10 @@
 
 {% block content %}
     <h1>Edit article '{{ article.title }}'</h1>
-    <form action="{% url 'blog:edit_article_path' article.pk %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Edit</button>
-        <button type="button"><a href="{% url 'blog:article_path' article.pk %}">Cancel</a></button>
+        <button type="button"><a href="{% url 'blog:article_detail' article.pk %}">Cancel</a></button>
     </form>
 {% endblock content %}

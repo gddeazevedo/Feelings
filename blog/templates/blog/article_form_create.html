@@ -10,6 +10,6 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Create</button>
-        <button type="button"><a href="{% url 'blog:root_path' %}">Cancel</a></button>
+        <button type="button"><a href="{% url 'blog:root' %}">Cancel</a></button>
     </form>
 {% endblock content %}

@@ -4,25 +4,20 @@ from . import views
 
 app_name = 'blog'
 
+
 urlpatterns = [
-    # /
-    path('', views.ArticleListView.as_view(), name='root_path'),
+    path('', views.ArticleListView.as_view(), name='root'),
 
-    # /articles
-    path('articles/', views.ArticleListView.as_view(), name='articles_path'),
+    path('articles/', views.ArticleListView.as_view(), name='articles_list'),
 
-    # /articles/:id
-    path('articles/<int:pk>/', views.article_detail, name='article_path'),
+    path('articles/<int:pk>/', views.article_detail, name='article_detail'),
 
-    # /articles/new
-    path('articles/new/', views.ArticleCreateView.as_view(), name='new_article_path'),
+    path('articles/create/', views.ArticleCreateView.as_view(), name='article_form_create'),
 
-    # /articles/:id/edit
-    path('articles/<int:pk>/edit/', views.ArticleUpdateView.as_view(), name='edit_article_path'),
+    path('articles/<int:pk>/update/', views.ArticleUpdateView.as_view(), name='article_form_edit'),
 
-    # /articles/:id/delete
-    path('articles/<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='delete_article_path'),
+    path('articles/<int:pk>/delete/', views.ArticleDeleteView.as_view(), name='article_confirm_delete'),
 
-    # /comments/:id/delete
-    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete_comment_path'),
+    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_confirm_delete'),
 ]
+

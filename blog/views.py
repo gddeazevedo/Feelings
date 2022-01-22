@@ -7,15 +7,6 @@ from .models import Article, Comment
 from .forms import CommentForm
 
 
-class ArticleListView(LoginRequiredMixin, ListView):
-    model = Article
-    context_object_name = 'articles'
-    ordering = ['-created_at']
-
-    # def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-    #     return super().get(request, *args, **kwargs)
-
-
 def article_detail(request: HttpRequest, pk: int):
     article = Article.objects.get(pk=pk)
 
@@ -29,10 +20,19 @@ def article_detail(request: HttpRequest, pk: int):
             comment.article = article
             comment.commenter = request.user
             comment.save()
-            return redirect(to='blog:article_path', pk=pk)
+            return redirect(to='blog:article_detail', pk=pk)
 
     context = {'article': article, 'comment_form': form}
     return render(request, 'blog/article_detail.html', context)
+
+
+class ArticleListView(LoginRequiredMixin, ListView):
+    model = Article
+    context_object_name = 'articles'
+    ordering = ['-created_at']
+
+    # def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    #     return super().get(request, *args, **kwargs)
 
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
@@ -48,7 +48,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
     def get_success_url(self) -> str:
-        return reverse('blog:article_path', kwargs={'pk': self.object.pk})
+        return reverse('blog:article_detail', kwargs={'pk': self.object.pk})
 
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -65,7 +65,7 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == article.author
 
     def get_success_url(self) -> str:
-        return reverse('blog:article_path', kwargs={'pk': self.object.pk})
+        return reverse('blog:article_detail', kwargs={'pk': self.object.pk})
 
 
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -87,4 +87,4 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == comment.commenter
 
     def get_success_url(self) -> str:
-        return reverse('blog:article_path', kwargs={'pk': self.object.article.pk})
+        return reverse('blog:article_detail', kwargs={'pk': self.object.article.pk})
