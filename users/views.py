@@ -23,7 +23,7 @@ def sign_up(request: HttpRequest):
             login(request, auth_user)
             return HttpResponseRedirect(reverse('blog:root'))
 
-    return render(request, 'users/sign-up.html', {'form': form})
+    return render(request, 'users/sign_up.html', {'form': form})
 
 
 def sign_out(request: HttpRequest):
